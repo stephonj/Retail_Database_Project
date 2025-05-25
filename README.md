@@ -44,7 +44,7 @@ An Employee processes many Orders
 
 Total Sales by Product
 
-Aggregates total revenue per product using SUM() and JOIN
+Aggregates total revenue per product
 
 Customer Order History
 Lists products purchased by each customer with quantities
