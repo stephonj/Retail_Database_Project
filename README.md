@@ -45,7 +45,7 @@ Customer Order History
 Lists products purchased by each customer with quantities
 
 **Project Screenshots**
-Folder includes screenshots of:
+**Folder includes screenshots of:**
 
 Table creation
 
