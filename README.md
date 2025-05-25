@@ -58,5 +58,6 @@ Sample data inserts
 
 Results from key SQL queries
 
-**Technologies Used**
+**Technologies Used:**
+
 MySQL
