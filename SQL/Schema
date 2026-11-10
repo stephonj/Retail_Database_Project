@@ -1,0 +1,62 @@
+-- Retail Database Project: schema
+-- Creates the RetailSystem database and its six tables.
+-- Run this file first, then sample_data.sql, then queries.sql.
+
+CREATE DATABASE IF NOT EXISTS RetailSystem;
+USE RetailSystem;
+
+CREATE TABLE Customers (
+    CustomerID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100)
+);
+
+CREATE TABLE Suppliers (
+    SupplierID INT AUTO_INCREMENT PRIMARY KEY,
+    CompanyName VARCHAR(100),
+    Phone VARCHAR(20)
+);
+
+CREATE TABLE Products (
+    ProductID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2),
+    SupplierID INT,
+    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE Employees (
+    EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Title VARCHAR(50),
+    Email VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    OrderID INT AUTO_INCREMENT PRIMARY KEY,
+    CustomerID INT,
+    EmployeeID INT,
+    OrderDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+        ON DELETE SET NULL,
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE OrderDetails (
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    Price DECIMAL(10,2),
+    PRIMARY KEY (OrderID, ProductID),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+        ON DELETE CASCADE,
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+        ON DELETE CASCADE
+);
+
+SHOW TABLES;
