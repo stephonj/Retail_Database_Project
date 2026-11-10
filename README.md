@@ -2,62 +2,80 @@
 
 A MySQL database project designed to model and analyze a retail company's inventory, customer orders, and sales. This project includes an Entity-Relationship diagram, normalized schema, sample data, and analytical SQL queries.
 
-**Features**
+# Business Questions Answered
+How much revenue has each product generated?
 
-Normalized relational schema using MySQL
+What has each customer purchased, and in what quantities?
 
-Foreign key relationships for data integrity
+For each order, who bought it, which employee handled it, and what was the total?
 
-Sample data for customers, products, employees, suppliers, and orders
+Which customers have never placed an order?
 
-Analytical SQL queries for business insights (e.g., total sales by product, customer order history)
+Which orders were larger than the average order?
 
-**Schema Overview**
+How do products rank by revenue?
+# Features
+Normalized relational schema with primary and foreign keys for data integrity
 
-The system includes the following entities:
+Sample data for customers, products, suppliers, employees, and orders
 
-Customers: CustomerID, FirstName, LastName, Email
+Six analytical queries covering aggregation, joins, a CTE, and a window function
 
-Products: ProductID, Name, Category, Price, SupplierID
+Full lifecycle: schema design, data population, query execution, reporting
+# Schema Overview
+**Table	& Columns**
+Customers	CustomerID, FirstName, LastName, Email
 
-Suppliers: SupplierID, CompanyName, Phone
+Products	ProductID, Name, Category, Price, SupplierID
 
-Employees: EmployeeID, FirstName, LastName, Title, Email
+Suppliers	SupplierID, CompanyName, Phone
 
-Orders: OrderID, CustomerID, EmployeeID, OrderDate
+Employees	EmployeeID, FirstName, LastName, Title, Email
 
-OrderDetails: OrderID, ProductID, Quantity, Price
+Orders	OrderID, CustomerID, EmployeeID, OrderDate
 
-**Relationships:**
+OrderDetails	OrderID, ProductID, Quantity, Price
 
-A Customer can place many Orders 
+# Relationships
 
-An Order has many OrderDetails 
+A customer can place many orders.
 
-A Product can appear in many OrderDetails 
+An order has many order details.
 
-A Product belongs to one Supplier 
+A product can appear in many order details.
 
-An Employee processes many Orders 
+A product belongs to one supplier.
 
-**Sample Queries:**
+An employee processes many orders.
+# Files
+schema.sql	Creates the RetailSystem database and all six tables
 
-Total Sales by Product
+sample_data.sql	Inserts sample customers, suppliers, products, employees, orders, and order details
 
-Aggregates total revenue per product
+queries.sql	Six analytical queries, each commented with the question it answers
 
-Customer Order History
-Lists products purchased by each customer with quantities
+screenshots/	Screenshots of table creation, data inserts, and query results
 
-**Project Screenshots**
-**Folder includes screenshots of:**
+Retail_Database_Project_Write-Up.pdf	Project write-up
+# How to Run
 
-Table creation
+Requires MySQL 8.0 or later (the CTE and window-function queries need it).
 
-Sample data inserts
+Run the scripts in this order from the MySQL command line, from the folder containing the files:
+bash
+   mysql -u root -p < schema.sql
+   mysql -u root -p < sample_data.sql
+   mysql -u root -p < queries.sql
 
-Results from key SQL queries
+# Queries
+Total sales by product: revenue per product (SUM with GROUP BY)
 
-**Technologies Used:**
+Customer order history: products purchased by each customer, with quantities (multi-table join)
 
-MySQL
+Order summary: customer, employee, and total for each order (four-table join)
+
+Customers with no orders: LEFT JOIN with an IS NULL filter
+
+Orders above the average order total: CTE with a subquery
+
+Product revenue ranking: window function (RANK)
