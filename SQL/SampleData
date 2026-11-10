@@ -1,0 +1,34 @@
+-- Retail Database Project: sample data
+-- Run after schema.sql.
+
+USE RetailSystem;
+
+INSERT INTO Customers (FirstName, LastName, Email) VALUES
+('Alice', 'Wong', 'alice.wong@example.com'),
+('Brian', 'Nguyen', 'brian.nguyen@example.com'),
+('Carla', 'Davis', 'carla.davis@example.com');
+
+INSERT INTO Suppliers (CompanyName, Phone) VALUES
+('Acme Electronics', '555-1234'),
+('Global Gadgets', '555-5678');
+
+INSERT INTO Products (Name, Category, Price, SupplierID) VALUES
+('Laptop', 'Electronics', 899.99, 1),
+('Wireless Mouse', 'Accessories', 24.99, 1),
+('Bluetooth Speaker', 'Audio', 49.99, 2);
+
+INSERT INTO Employees (FirstName, LastName, Title, Email) VALUES
+('Jordan', 'Smith', 'Sales Rep', 'jsmith@retailco.com'),
+('Maria', 'Lopez', 'Cashier', 'mlopez@retailco.com');
+
+INSERT INTO Orders (CustomerID, EmployeeID, OrderDate) VALUES
+(1, 1, '2024-06-01'),
+(2, 2, '2024-06-02');
+
+INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price) VALUES
+(1, 1, 1, 899.99),   -- Alice buys 1 Laptop
+(1, 2, 2, 24.99),    -- and 2 Wireless Mice
+(2, 3, 1, 49.99);    -- Brian buys 1 Bluetooth Speaker
+
+-- Quick check
+SELECT * FROM Customers;
